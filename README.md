@@ -7,6 +7,7 @@
 本仓库是开题报告的补充材料库，包含方案架构图、模拟数据样本、核心逻辑演示及最终提交的开题报告PDF。
 
 ## 目录结构
+```
 ChaBaiDao-Al-Innovation-Toolkit/
 ├── README.md                      # 项目说明（本文件）
 ├── docs/                          # 文档材料目录
@@ -18,6 +19,7 @@ ChaBaiDao-Al-Innovation-Toolkit/
 │   └── concept_demo.html           # 简易交互原型
 └── references/                    # 参考资料目录
     └── industry_insights.md        # 行业报告与竞品分析笔记
+```
 
 ## 快速开始
 可以通过以下方式快速了解本方案的核心思路：
