@@ -46,5 +46,4 @@ ChaBaiDao-Al-Innovation-Toolkit/
 - **原型展示**：HTML/CSS/JavaScript、Mermaid流程图
 
 ## 备注
-
 本仓库所有材料均为参赛开题阶段的补充说明，旨在展示方案逻辑的完整性与选手的思考深度。方案中的模拟数据及演示原型均为概念验证性质，非生产环境代码。
