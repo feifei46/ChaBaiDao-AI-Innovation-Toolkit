@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星河引擎 · AI小料推荐模拟器</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f0eb 0%, #e8ddd0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 48px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        .badge {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #e8d5b7;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+        .sub {
+            color: #8a7a6a;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .emoji-big {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #2d2a24;
+            display: block;
+            margin-bottom: 6px;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid #ddd6ce;
+            font-size: 15px;
+            background: #fcf9f6;
+            transition: 0.2s;
+            margin-bottom: 16px;
+            outline: none;
+        }
+        select:focus, input:focus {
+            border-color: #b8a088;
+            background: white;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #1a1a2e;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #2d2a44;
+            transform: translateY(-1px);
+        }
+        .result {
+            margin-top: 24px;
+            padding: 20px 24px;
+            background: #f8f4ef;
+            border-radius: 16px;
+            display: none;
+            border-left: 4px solid #b8a088;
+        }
+        .result.show { display: block; }
+        .result h3 {
+            font-size: 18px;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        .result .desc {
+            color: #5a4f44;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .tag {
+            display: inline-block;
+            background: #e8ddd0;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #3d352c;
+            margin-top: 8px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #b0a69a;
+            text-align: center;
+            border-top: 1px solid #eee8e0;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="badge"> 概念验证 · 星河引擎 v0.1</span>
+        <span class="emoji-big"></span>
+        <h1>AI 小料共创模拟器</h1>
+        <p class="sub">基于口感情绪聚类 · 反向生成小料概念</p>
+
+        <label for="mood"> 选择你的"口感性格"</label>
+        <select id="mood">
+            <option value="">—— 请选择 ——</option>
+            <option value="crunch"> 咀嚼解压党 · 脆爽爆破感</option>
+            <option value="chewy"> 糯叽叽星人 · 绵密有嚼劲</option>
+            <option value="smooth"> 清爽顺滑派 · 丝滑不腻</option>
+            <option value="filling"> 饱腹养生组 · 扎实有料</option>
+        </select>
+
+        <label for="tea"> 搭配茶底偏好</label>
+        <select id="tea">
+            <option value="">—— 请选择 ——</option>
+            <option value="osmanthus">桂花乌龙</option>
+            <option value="jasmine">茉莉绿茶</option>
+            <option value="black">经典红茶</option>
+            <option value="tieguanyin">铁观音</option>
+        </select>
+
+        <button class="btn" onclick="generate()">AI 生成小料概念</button>
+
+        <div class="result" id="result">
+            <h3 id="resultTitle"> 椰云马蹄爆珠</h3>
+            <div class="desc" id="resultDesc">
+                分子料理级爆珠 · 马蹄颗粒包裹椰浆流心<br />
+                咬破瞬间释放清甜椰香，与桂花乌龙茶底形成"茶香+爆破"双重愉悦
+            </div>
+            <span class="tag" id="resultTag">#口感匹配度 92%</span>
+        </div>
+
+        <div class="footer">
+             模拟数据基于茶百道1.8亿会员评价聚类 · 仅供概念演示
+        </div>
+    </div>
+
+    <script>
+        const data = {
+            crunch: {
+                title: '椰云马蹄爆珠',
+                desc: '分子料理级爆珠 · 马蹄颗粒包裹椰浆流心，咬破瞬间释放清甜椰香，与桂花乌龙茶底形成"茶香+爆破"双重愉悦',
+                tag: '#口感匹配度 92% · 脆爽解压'
+            },
+            chewy: {
+                title: '黑糖麻薯芋泥波波',
+                desc: '手捣芋泥混合黑糖麻薯丁，吸管每口都能吃到软糯Q弹的麻薯颗粒，与经典红茶底搭配，饱腹感与幸福感兼具',
+                tag: '#口感匹配度 89% · 糯叽叽治愈'
+            },
+            smooth: {
+                title: '青柠薄荷冻冻',
+                desc: '透明茶冻添加天然青柠薄荷萃取液，入口即化的清爽感，搭配茉莉绿茶，宛如一阵清凉山风掠过舌尖',
+                tag: '#口感匹配度 94% · 清爽不腻'
+            },
+            filling: {
+                title: '桂圆红枣血糯米',
+                desc: '低温慢煮血糯米保持颗粒感，加入桂圆干与红枣碎，铁观音茶底回甘悠长，一杯满足下午茶代餐需求',
+                tag: '#口感匹配度 87% · 养生饱腹'
+            }
+        };
+
+        function generate() {
+            const mood = document.getElementById('mood').value;
+            const tea = document.getElementById('tea').value;
+            const result = document.getElementById('result');
+
+            if (!mood || !tea) {
+                alert('请先选择"口感性格"和"茶底偏好"哦！');
+                return;
+            }
+
+            const hit = data[mood];
+            if (hit) {
+                document.getElementById('resultTitle').textContent = hit.title;
+                document.getElementById('resultDesc').textContent = hit.desc;
+                document.getElementById('resultTag').textContent = hit.tag;
+                result.classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>
