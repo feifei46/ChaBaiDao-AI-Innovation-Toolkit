@@ -8,16 +8,16 @@
 
 ## 目录结构
 ChaBaiDao-Al-Innovation-Toolkit/
-── README.md # 项目说明（本文件）
-── docs/ # 文档材料目录
-  ├── 开题报告_茶的百次方.pdf # 最终提交的正式开题报告
-  └── 方案架构图.md # 系统流程图
-── data_sample/ # 模拟数据样本目录
-  └── user_sentiment_sample.csv # 模拟的消费者评价数据样本
-── prototype/ # 原型演示目录
-  └── concept_demo.html # 简易交互原型
-── references/ # 参考资料目录
-── industry_insights.md # 行业报告与竞品分析笔记
+├── README.md                      # 项目说明（本文件）
+├── docs/                          # 文档材料目录
+│   ├── 开题报告_茶的百次方.pdf      # 最终提交的正式开题报告
+│   └── 方案架构图.md               # 系统流程图
+├── data_sample/                   # 模拟数据样本目录
+│   └── user_sentiment_sample.csv   # 模拟的消费者评价数据样本
+├── prototype/                     # 原型演示目录
+│   └── concept_demo.html           # 简易交互原型
+└── references/                    # 参考资料目录
+    └── industry_insights.md        # 行业报告与竞品分析笔记
 
 ## 快速开始
 可以通过以下方式快速了解本方案的核心思路：
