@@ -183,7 +183,7 @@
 </head>
 <body>
     <div class="card">
-        <span class="badge">茶的百次方 · 星河引擎 v0.2</span>
+        <span class="badge">🍵 茶的百次方 · 星河引擎 v0.2</span>
         <span class="emoji-big">🧋</span>
         <h1>星河引擎 · AI 小料共创模拟器</h1>
         <p class="sub">基于口感情绪聚类 + 茶底风味匹配 · 24款小料概念库</p>
@@ -191,12 +191,12 @@
         <label for="mood">选择你的"口感性格"</label>
         <select id="mood">
             <option value="">—— 请选择 ——</option>
-            <option value="crunch">咀嚼解压党 · 脆爽爆破感</option>
-            <option value="chewy">糯叽叽星人 · 绵密有嚼劲</option>
-            <option value="smooth">清爽顺滑派 · 丝滑不腻</option>
-            <option value="filling">饱腹养生组 · 扎实有料</option>
-            <option value="refreshing">清爽草本系 · 轻盈透亮</option>
-            <option value="creamy">浓郁乳香系 · 醇厚绵密</option>
+            <option value="crunch">💥 咀嚼解压党 · 脆爽爆破感</option>
+            <option value="chewy">🫘 糯叽叽星人 · 绵密有嚼劲</option>
+            <option value="smooth">🌊 清爽顺滑派 · 丝滑不腻</option>
+            <option value="filling">🍚 饱腹养生组 · 扎实有料</option>
+            <option value="refreshing">🌿 清爽草本系 · 轻盈透亮</option>
+            <option value="creamy">🥛 浓郁乳香系 · 醇厚绵密</option>
         </select>
 
         <label for="tea">搭配茶底偏好</label>
@@ -210,7 +210,7 @@
             <option value="white">白毫银针 · 清甜淡雅</option>
         </select>
 
-        <button class="btn" onclick="generate()">AI生成小料概念</button>
+        <button class="btn" onclick="generate()">✨ AI 生成小料概念</button>
 
         <div class="result" id="result">
             <h3 id="resultTitle">椰云马蹄爆珠</h3>
@@ -452,9 +452,9 @@
             },
             creamy: {
                 osmanthus: {
-                    title: '桂花奶油啵啵',
-                    flavors: ['奶油啵啵', '桂花蜜', '奶香'],
-                    desc: '奶油制成大啵啵，裹桂花蜜，入口爆浆，奶香与桂花香在口中炸开，桂花乌龙茶底延展花香',
+                    title: '桂花奶油波波',
+                    flavors: ['奶油波波', '桂花蜜', '奶香'],
+                    desc: '奶油制成大波波，裹桂花蜜，入口爆浆，奶香与桂花香在口中炸开，桂花乌龙茶底延展花香',
                     slogan: '「奶油炸弹，桂香轰炸」',
                     score: '91%'
                 },
@@ -498,12 +498,12 @@
 
         // 匹配描述映射
         const moodMap = {
-            crunch: '咀嚼解压党',
-            chewy: '糯叽叽星人',
-            smooth: '清爽顺滑派',
-            filling: '饱腹养生组',
-            refreshing: '清爽草本系',
-            creamy: '浓郁乳香系'
+            crunch: '💥 咀嚼解压党',
+            chewy: '🫘 糯叽叽星人',
+            smooth: '🌊 清爽顺滑派',
+            filling: '🍚 饱腹养生组',
+            refreshing: '🌿 清爽草本系',
+            creamy: '🥛 浓郁乳香系'
         };
 
         const teaMap = {
@@ -539,7 +539,7 @@
                 // 如果该组合没有预设，显示相近推荐
                 const fallback = flavorDB[mood]?.[Object.keys(flavorDB[mood])[0]];
                 if (fallback) {
-                    document.getElementById('resultTitle').textContent = `${fallback.title}（推荐适配）`;
+                    document.getElementById('resultTitle').textContent = `✨ ${fallback.title}（推荐适配）`;
                     document.getElementById('resultFlavors').innerHTML = fallback.flavors.map(f => 
                         `<span class="flavor-tag">#${f}</span>`
                     ).join('');
@@ -551,8 +551,10 @@
                     alert('暂无该组合的小料概念，试试其他选择吧！');
                 }
             }
+
+            // 更新计数
             const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
-            document.getElementById('resultCount').textContent = `已生成 ${count} 款小料概念 · 覆盖 6 种口感 × 6 种茶底`;
+            document.getElementById('resultCount').textContent = `✨ 已生成 ${count} 款小料概念 · 覆盖 6 种口感 × 6 种茶底`;
         }
     </script>
 </body>
