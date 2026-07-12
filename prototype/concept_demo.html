@@ -77,8 +77,6 @@
                 transform: translate(-2%, -1%) scale(1) rotate(-0.5deg);
             }
         }
-
-        /* 动态水波流动动画 - 次要波浪 */
         @keyframes waveSlide2 {
             0% {
                 transform: translate(0, 0) scale(1) rotate(0deg);
@@ -93,8 +91,6 @@
                 transform: translate(-1%, 2%) scale(1) rotate(-0.5deg);
             }
         }
-
-        /* 背景呼吸动画 - 颜色深浅变化 */
         @keyframes breathe {
             0% {
                 background: linear-gradient(135deg, #e8f0fe 0%, #dce6f8 50%, #e8f0fe 100%);
@@ -106,8 +102,6 @@
                 background: linear-gradient(135deg, #e8f0fe 0%, #d4e0f5 50%, #e8f0fe 100%);
             }
         }
-
-        /* ===== 卡片（保持白色不透明，浮在背景上方） ===== */
         .card {
             position: relative;
             z-index: 1;
@@ -737,7 +731,7 @@
             } else {
                 const fallback = flavorDB[moodValue]?.[Object.keys(flavorDB[moodValue])[0]];
                 if (fallback) {
-                    document.getElementById('resultTitle').textContent = `✨ ${fallback.title}（推荐适配）`;
+                    document.getElementById('resultTitle').textContent = `${fallback.title}（推荐适配）`;
                     document.getElementById('resultFlavors').innerHTML = fallback.flavors.map(f =>
                         `<span class="flavor-tag">#${f}</span>`
                     ).join('');
