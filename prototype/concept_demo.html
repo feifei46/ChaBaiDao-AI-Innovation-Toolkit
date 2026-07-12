@@ -95,8 +95,8 @@
 
         .btn {
             flex: 1;
-            min-width: 100px;
-            padding: 14px 18px;
+            min-width: 0;
+            padding: 14px 12px;
             background: #003399;
             color: white;
             font-size: 15px;
@@ -118,40 +118,15 @@
             transform: scale(0.98);
         }
 
-        .btn-random {
+        .btn-light {
             background: #ffffff;
             color: #003399;
             border: 2px solid #003399;
         }
 
-        .btn-random:hover {
+        .btn-light:hover {
             background: #e8f0fe;
             box-shadow: 0 8px 24px rgba(0, 51, 153, 0.15);
-        }
-
-        .btn-blindbox {
-            background: #6c5ce7;
-            color: #fff;
-        }
-
-        .btn-blindbox:hover {
-            background: #5a4bd1;
-        }
-
-        .btn-pk {
-            background: #e17055;
-            color: #fff;
-        }
-
-        .btn-pk:hover {
-            background: #d63031;
-        }
-
-        .btn-sm {
-            font-size: 13px;
-            padding: 10px 14px;
-            min-width: auto;
-            flex: 0 1 auto;
         }
 
         .result {
@@ -240,70 +215,6 @@
             letter-spacing: 2px;
             text-align: center;
             margin: 10px 0;
-        }
-
-        .result .pk-vs {
-            display: flex;
-            gap: 16px;
-            justify-content: space-between;
-            align-items: center;
-            margin: 12px 0;
-        }
-
-        .result .pk-item {
-            flex: 1;
-            padding: 14px;
-            background: #fff;
-            border-radius: 12px;
-            border: 2px solid #e8f0fe;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .result .pk-item:hover {
-            border-color: #003399;
-            transform: scale(1.02);
-        }
-
-        .result .pk-item.selected {
-            border-color: #003399;
-            background: #e8f0fe;
-        }
-
-        .result .pk-item .pk-name {
-            font-weight: 700;
-            color: #003399;
-            font-size: 16px;
-        }
-
-        .result .pk-item .pk-desc {
-            font-size: 13px;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        .result .pk-vs-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #003399;
-        }
-
-        .result .bottle {
-            background: #e8f4f8;
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-top: 12px;
-            color: #1a5276;
-            font-size: 14px;
-            border: 1px solid #aed6f1;
-            text-align: center;
-        }
-
-        .result .bottle .bottle-icon {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 6px;
         }
 
         /* ===== 自定义提示框 ===== */
@@ -399,12 +310,6 @@
             .btn {
                 min-width: auto;
             }
-            .result .pk-vs {
-                flex-direction: column;
-            }
-            .result .pk-vs-text {
-                transform: rotate(90deg);
-            }
         }
     </style>
 </head>
@@ -453,14 +358,12 @@
 
         <div class="btn-group">
             <button class="btn" onclick="generate()">生成小料</button>
-            <button class="btn btn-random" onclick="bottleMode()">漂流瓶</button>
-            <button class="btn btn-blindbox" onclick="blindboxMode()">盲盒模式</button>
+            <button class="btn btn-light" onclick="blindboxMode()">盲盒模式</button>
         </div>
 
         <div class="btn-group" style="margin-top:10px;">
-            <button class="btn btn-pk btn-sm" onclick="pkMode()">PK擂台</button>
-            <button class="btn btn-sm" onclick="generateWithFortune()">今日运势</button>
-            <button class="btn btn-random btn-sm" onclick="generateHiddenMenu()">隐藏菜单</button>
+            <button class="btn" onclick="generateWithFortune()">今日运势</button>
+            <button class="btn btn-light" onclick="generateHiddenMenu()">隐藏菜单</button>
         </div>
 
         <div class="result" id="result">
@@ -784,20 +687,6 @@
             '椰奶冻丁·热带风情'
         ];
 
-        // ===== 漂流瓶寄语库 =====
-        const bottleMessages = [
-            '这杯小料，适合搭配一个下雨的午后',
-            '送给喜欢脆脆口感的你',
-            '偶然相遇，便是缘分',
-            '今日份的快乐，藏在这杯茶里',
-            '来自陌生人的小料推荐，请查收',
-            '生活有点苦，但这杯茶有点甜',
-            '夏天和冰饮，还有一颗自由的心',
-            '今晚的月色很美，茶也很美',
-            '你相信巧合吗？这杯就是为你选的',
-            '别犹豫了，就它了！喝就对了'
-        ];
-
         // ===== 状态 =====
         const moodMap = {
             crunch: '脆爽爆破感',
@@ -852,7 +741,6 @@
                 }
             }
 
-            // 显示结果
             document.getElementById('resultTitle').textContent = data.title;
             document.getElementById('resultFlavors').innerHTML = data.flavors.map(f =>
                 `<span class="flavor-tag">#${f}</span>`
@@ -870,28 +758,6 @@
         // ===== 生成小料 =====
         function generate() {
             generateFromSelection(moodSelect.value, teaSelect.value, true);
-        }
-
-        // ===== 漂流瓶模式（原随机探索的替代） =====
-        function bottleMode() {
-            const moodKeys = Object.keys(flavorDB);
-            const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
-            const randomMood = moodKeys[Math.floor(Math.random() * moodKeys.length)];
-            const randomTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
-            const message = bottleMessages[Math.floor(Math.random() * bottleMessages.length)];
-
-            moodSelect.value = randomMood;
-            teaSelect.value = randomTea;
-            const data = generateFromSelection(randomMood, randomTea, false);
-
-            if (data) {
-                document.getElementById('resultExtra').innerHTML = `
-                    <div class="bottle">
-                        <span class="bottle-icon">🍾</span>
-                        ${message}
-                    </div>
-                `;
-            }
         }
 
         // ===== 今日运势 =====
@@ -930,7 +796,7 @@
             document.getElementById('result').classList.remove('show');
 
             document.getElementById('resultExtra').innerHTML = '';
-            document.getElementById('resultTitle').textContent = '盲盒开启中...';
+            document.getElementById('resultTitle').textContent = '🎁 盲盒开启中...';
             document.getElementById('resultFlavors').innerHTML = '';
             document.getElementById('resultDesc').textContent = '3... 2... 1... 🎉';
             document.getElementById('resultSlogan').textContent = '';
@@ -949,77 +815,6 @@
                 }
                 blindboxTimer = null;
             }, 1200);
-        }
-
-        // ===== PK擂台 =====
-        function pkMode() {
-            const moodValue = moodSelect.value;
-            const teaValue = teaSelect.value;
-
-            if (!moodValue || !teaValue) {
-                showToast('请先选择"口感性格"和"茶底偏好"哦！', '提示', '🧋');
-                return;
-            }
-
-            const data = generateFromSelection(moodValue, teaValue, false);
-            if (!data) return;
-
-            const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
-            let secondTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
-            let attempts = 0;
-            while (secondTea === teaValue && attempts < 10) {
-                secondTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
-                attempts++;
-            }
-            const secondData = flavorDB[moodValue]?.[secondTea];
-            if (!secondData) {
-                showToast('PK对手不够了，再试一次吧！', '提示', '🧋');
-                return;
-            }
-
-            document.getElementById('resultTitle').textContent = '小料PK擂台';
-            document.getElementById('resultFlavors').innerHTML = '';
-            document.getElementById('resultDesc').textContent = '点击下方你更喜欢的一款！';
-            document.getElementById('resultSlogan').textContent = '';
-            document.getElementById('resultScore').textContent = '';
-            document.getElementById('resultExtra').innerHTML = `
-                <div class="pk-vs">
-                    <div class="pk-item" onclick="pkChoose('A')" id="pkA">
-                        <div class="pk-name">${data.title}</div>
-                        <div class="pk-desc">${data.desc.substring(0, 20)}...</div>
-                        <div style="font-size:13px;color:#888;margin-top:4px;">${data.score} · ${teaMap[teaValue]}</div>
-                    </div>
-                    <div class="pk-vs-text">VS</div>
-                    <div class="pk-item" onclick="pkChoose('B')" id="pkB">
-                        <div class="pk-name">${secondData.title}</div>
-                        <div class="pk-desc">${secondData.desc.substring(0, 20)}...</div>
-                        <div style="font-size:13px;color:#888;margin-top:4px;">${secondData.score} · ${teaMap[secondTea]}</div>
-                    </div>
-                </div>
-                <div id="pkResult" style="text-align:center;font-size:16px;font-weight:600;color:#003399;margin-top:12px;"></div>
-            `;
-
-            document.getElementById('result').classList.add('show');
-            window._pkData = { A: data, B: secondData };
-        }
-
-        function pkChoose(choice) {
-            const data = window._pkData;
-            if (!data) return;
-
-            const selected = choice === 'A' ? data.A : data.B;
-            const name = choice === 'A' ? data.A.title : data.B.title;
-
-            document.getElementById('pkA').classList.remove('selected');
-            document.getElementById('pkB').classList.remove('selected');
-            if (choice === 'A') {
-                document.getElementById('pkA').classList.add('selected');
-            } else {
-                document.getElementById('pkB').classList.add('selected');
-            }
-
-            document.getElementById('pkResult').textContent =
-                `你选择了「${name}」！口感匹配度 ${selected.score}`;
         }
     </script>
 </body>
