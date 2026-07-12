@@ -7,113 +7,24 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* ===== 动态背景 ===== */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background: #e8f0fe;
-            /* 备用背景色 */
-            overflow: hidden;
-            position: relative;
         }
 
-        /* 水波纹容器 - 覆盖整个页面 */
-        .wave-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: linear-gradient(135deg, #e8f0fe 0%, #d4e0f5 50%, #e8f0fe 100%);
-            animation: breathe 6s ease-in-out infinite alternate;
-        }
-
-        /* 水波滑动的线条1 */
-        .wave-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(0, 51, 153, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(0, 51, 153, 0.04) 0%, transparent 50%);
-            animation: waveSlide 12s ease-in-out infinite alternate;
-        }
-
-        /* 水波滑动的线条2 - 更柔和的光影 */
-        .wave-bg::after {
-            content: '';
-            position: absolute;
-            top: -30%;
-            left: -30%;
-            width: 160%;
-            height: 160%;
-            background: radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 60%, rgba(0, 51, 153, 0.03) 0%, transparent 40%);
-            animation: waveSlide2 15s ease-in-out infinite alternate;
-        }
-
-        /* 动态水波流动动画 - 主要波浪 */
-        @keyframes waveSlide {
-            0% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            25% {
-                transform: translate(2%, -2%) scale(1.02) rotate(1deg);
-            }
-            50% {
-                transform: translate(-1%, 1%) scale(0.98) rotate(-1deg);
-            }
-            75% {
-                transform: translate(1%, 2%) scale(1.01) rotate(0.5deg);
-            }
-            100% {
-                transform: translate(-2%, -1%) scale(1) rotate(-0.5deg);
-            }
-        }
-        @keyframes waveSlide2 {
-            0% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-            }
-            33% {
-                transform: translate(-3%, 1%) scale(1.03) rotate(-1.5deg);
-            }
-            66% {
-                transform: translate(2%, -2%) scale(0.97) rotate(1deg);
-            }
-            100% {
-                transform: translate(-1%, 2%) scale(1) rotate(-0.5deg);
-            }
-        }
-        @keyframes breathe {
-            0% {
-                background: linear-gradient(135deg, #e8f0fe 0%, #dce6f8 50%, #e8f0fe 100%);
-            }
-            50% {
-                background: linear-gradient(135deg, #dce6f8 0%, #e8f0fe 50%, #dce6f8 100%);
-            }
-            100% {
-                background: linear-gradient(135deg, #e8f0fe 0%, #d4e0f5 50%, #e8f0fe 100%);
-            }
-        }
         .card {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: #ffffff;
             border-radius: 24px;
             padding: 40px 48px;
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0, 51, 153, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 51, 153, 0.08);
         }
 
         .badge {
@@ -127,17 +38,26 @@
             letter-spacing: 0.5px;
             margin-bottom: 16px;
         }
+
         h1 {
             font-size: 24px;
             font-weight: 700;
             color: #003399;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
+
+        .sub-title {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
         .emoji-big {
             font-size: 40px;
             display: block;
             margin-bottom: 12px;
         }
+
         label {
             font-weight: 600;
             font-size: 14px;
@@ -145,6 +65,7 @@
             display: block;
             margin-bottom: 6px;
         }
+
         select,
         input {
             width: 100%;
@@ -152,24 +73,33 @@
             border-radius: 12px;
             border: 1.5px solid #d0dbe8;
             font-size: 15px;
-            background: rgba(248, 250, 255, 0.8);
+            background: #f8faff;
             transition: 0.2s;
             margin-bottom: 16px;
             outline: none;
             color: #1a1a2e;
         }
+
         select:focus,
         input:focus {
             border-color: #003399;
             background: #ffffff;
             box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.12);
         }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .btn {
-            width: 100%;
-            padding: 14px;
+            flex: 1;
+            min-width: 100px;
+            padding: 14px 18px;
             background: #003399;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             border: none;
             border-radius: 14px;
@@ -177,36 +107,67 @@
             transition: 0.3s;
             text-align: center;
         }
+
         .btn:hover {
             background: #002277;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 51, 153, 0.25);
         }
+
         .btn:active {
             transform: scale(0.98);
         }
+
         .btn-random {
             background: #ffffff;
             color: #003399;
             border: 2px solid #003399;
-            margin-top: 12px;
         }
+
         .btn-random:hover {
             background: #e8f0fe;
             box-shadow: 0 8px 24px rgba(0, 51, 153, 0.15);
         }
+
+        .btn-blindbox {
+            background: #6c5ce7;
+            color: #fff;
+        }
+
+        .btn-blindbox:hover {
+            background: #5a4bd1;
+        }
+
+        .btn-pk {
+            background: #e17055;
+            color: #fff;
+        }
+
+        .btn-pk:hover {
+            background: #d63031;
+        }
+
+        .btn-sm {
+            font-size: 13px;
+            padding: 10px 14px;
+            min-width: auto;
+            flex: 0 1 auto;
+        }
+
         .result {
             margin-top: 24px;
             padding: 20px 24px;
-            background: rgba(248, 250, 255, 0.85);
+            background: #f8faff;
             border-radius: 16px;
             display: none;
             border-left: 4px solid #003399;
             animation: fadeIn 0.4s ease;
         }
+
         .result.show {
             display: block;
         }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -217,11 +178,13 @@
                 transform: translateY(0);
             }
         }
+
         .result h3 {
             font-size: 20px;
             color: #003399;
             margin-bottom: 4px;
         }
+
         .result .flavor-tag {
             display: inline-block;
             background: #e8f0fe;
@@ -231,18 +194,21 @@
             font-size: 12px;
             margin-right: 6px;
         }
+
         .result .desc {
             color: #333333;
             font-size: 14px;
             line-height: 1.6;
             margin: 8px 0;
         }
+
         .result .slogan {
             color: #666666;
             font-size: 13px;
             font-style: italic;
             margin: 6px 0;
         }
+
         .result .score {
             display: inline-block;
             background: #003399;
@@ -252,6 +218,92 @@
             font-size: 12px;
             font-weight: 500;
             margin-top: 8px;
+        }
+
+        .result .fortune {
+            background: #fef9e7;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-top: 12px;
+            color: #7d6608;
+            font-size: 14px;
+            border: 1px solid #f9e79f;
+        }
+
+        .result .hidden-code {
+            background: #1a1a2e;
+            color: #f5c842;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .result .pk-vs {
+            display: flex;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0;
+        }
+
+        .result .pk-item {
+            flex: 1;
+            padding: 14px;
+            background: #fff;
+            border-radius: 12px;
+            border: 2px solid #e8f0fe;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .result .pk-item:hover {
+            border-color: #003399;
+            transform: scale(1.02);
+        }
+
+        .result .pk-item.selected {
+            border-color: #003399;
+            background: #e8f0fe;
+        }
+
+        .result .pk-item .pk-name {
+            font-weight: 700;
+            color: #003399;
+            font-size: 16px;
+        }
+
+        .result .pk-item .pk-desc {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .result .pk-vs-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #003399;
+        }
+
+        .result .bottle {
+            background: #e8f4f8;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-top: 12px;
+            color: #1a5276;
+            font-size: 14px;
+            border: 1px solid #aed6f1;
+            text-align: center;
+        }
+
+        .result .bottle .bottle-icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
         }
 
         /* ===== 自定义提示框 ===== */
@@ -268,9 +320,11 @@
             z-index: 9999;
             animation: fadeInOverlay 0.25s ease;
         }
+
         .toast-overlay.show {
             display: flex;
         }
+
         @keyframes fadeInOverlay {
             from {
                 opacity: 0;
@@ -279,6 +333,7 @@
                 opacity: 1;
             }
         }
+
         .toast-box {
             background: #ffffff;
             border-radius: 20px;
@@ -289,33 +344,27 @@
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
             animation: popIn 0.3s ease;
         }
-        @keyframes popIn {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+
         .toast-icon {
             font-size: 36px;
             margin-bottom: 12px;
             display: block;
         }
+
         .toast-title {
             font-size: 18px;
             font-weight: 600;
             color: #003399;
             margin-bottom: 6px;
         }
+
         .toast-message {
             font-size: 15px;
             color: #444444;
             line-height: 1.6;
             margin-bottom: 20px;
         }
+
         .toast-btn {
             background: #003399;
             color: #ffffff;
@@ -327,9 +376,11 @@
             cursor: pointer;
             transition: 0.2s;
         }
+
         .toast-btn:hover {
             background: #002277;
         }
+
         .toast-btn:active {
             transform: scale(0.96);
         }
@@ -337,18 +388,27 @@
         /* 移动端适配 */
         @media (max-width: 500px) {
             .card {
-                padding: 28px 20px;
+                padding: 24px 16px;
             }
             h1 {
                 font-size: 20px;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                min-width: auto;
+            }
+            .result .pk-vs {
+                flex-direction: column;
+            }
+            .result .pk-vs-text {
+                transform: rotate(90deg);
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- ===== 动态水波纹背景 ===== -->
-    <div class="wave-bg"></div>
 
     <!-- ===== 自定义提示框 ===== -->
     <div class="toast-overlay" id="toastOverlay">
@@ -356,7 +416,9 @@
             <span class="toast-icon" id="toastIcon">🧋</span>
             <div class="toast-title" id="toastTitle">提示</div>
             <div class="toast-message" id="toastMessage">请先选择"口感性格"和"茶底偏好"哦！</div>
-            <button class="toast-btn" onclick="closeToast()">知道了</button>
+            <div>
+                <button class="toast-btn" onclick="closeToast()">知道了</button>
+            </div>
         </div>
     </div>
 
@@ -365,6 +427,7 @@
         <span class="badge">茶的百次方</span>
         <span class="emoji-big">🧋</span>
         <h1>AI 小料共创模拟器</h1>
+        <div class="sub-title">探索属于你的那杯茶</div>
 
         <label for="mood">选择你的"口感性格"</label>
         <select id="mood">
@@ -388,14 +451,24 @@
             <option value="white">白毫银针</option>
         </select>
 
-        <button class="btn" onclick="generate()">AI 生成小料概念</button>
-        <button class="btn btn-random" onclick="randomGenerate()">随机探索</button>
+        <div class="btn-group">
+            <button class="btn" onclick="generate()">生成小料</button>
+            <button class="btn btn-random" onclick="bottleMode()">漂流瓶</button>
+            <button class="btn btn-blindbox" onclick="blindboxMode()">盲盒模式</button>
+        </div>
+
+        <div class="btn-group" style="margin-top:10px;">
+            <button class="btn btn-pk btn-sm" onclick="pkMode()">PK擂台</button>
+            <button class="btn btn-sm" onclick="generateWithFortune()">今日运势</button>
+            <button class="btn btn-random btn-sm" onclick="generateHiddenMenu()">隐藏菜单</button>
+        </div>
 
         <div class="result" id="result">
             <h3 id="resultTitle">椰云马蹄爆珠</h3>
             <div id="resultFlavors"></div>
             <div class="desc" id="resultDesc">分子料理级爆珠 · 马蹄颗粒包裹椰浆流心</div>
             <div class="slogan" id="resultSlogan">「咬破瞬间，清甜炸裂」</div>
+            <div id="resultExtra"></div>
             <span class="score" id="resultScore">口感匹配度 92%</span>
         </div>
     </div>
@@ -413,7 +486,6 @@
             document.getElementById('toastOverlay').classList.remove('show');
         }
 
-        // 点击遮罩层也可以关闭
         document.getElementById('toastOverlay').addEventListener('click', function(e) {
             if (e.target === this) closeToast();
         });
@@ -686,15 +758,55 @@
             }
         };
 
-        const moodMap = {
-            crunch: '咀嚼解压党',
-            chewy: '糯叽叽星人',
-            smooth: '清爽顺滑派',
-            filling: '饱腹养生组',
-            refreshing: '清爽草本系',
-            creamy: '浓郁乳香系'
-        };
+        // ===== 运势文案库 =====
+        const fortunes = [
+            '今天适合尝试新事物，让脆爽的口感唤醒你的味蕾',
+            '绵密的口感提醒你：今天要好好照顾自己',
+            '清爽的选择让你一整天都轻盈自在',
+            '醇厚的味道告诉你：慢下来，享受这一刻',
+            '今天宜探索，宜尝试，宜发现惊喜',
+            '丝滑的口感，适合搭配一个慵懒的下午',
+            '扎实有料，今天你充满能量',
+            '轻盈透亮，像今天的你一样清新',
+            '醇厚绵密，今天适合温暖自己',
+            '脆爽爆破，今天适合突破舒适区'
+        ];
 
+        // ===== 隐藏菜单暗号库 =====
+        const hiddenCodes = [
+            '桂香爆珠·春日限定',
+            '深椰马蹄·隐藏款',
+            '青柠秘境·特调',
+            '黑糖麻薯·古法手作',
+            '桂花酒酿·微醺系列',
+            '铁观音茶冻·大师特调',
+            '抹茶白玉·纯享版',
+            '椰奶冻丁·热带风情'
+        ];
+
+        // ===== 漂流瓶寄语库 =====
+        const bottleMessages = [
+            '这杯小料，适合搭配一个下雨的午后',
+            '送给喜欢脆脆口感的你',
+            '偶然相遇，便是缘分',
+            '今日份的快乐，藏在这杯茶里',
+            '来自陌生人的小料推荐，请查收',
+            '生活有点苦，但这杯茶有点甜',
+            '夏天和冰饮，还有一颗自由的心',
+            '今晚的月色很美，茶也很美',
+            '你相信巧合吗？这杯就是为你选的',
+            '别犹豫了，就它了！喝就对了'
+        ];
+
+        // ===== 状态 =====
+        const moodMap = {
+            crunch: '脆爽爆破感',
+            chewy: '绵密有嚼劲',
+            smooth: '丝滑不腻',
+            filling: '扎实有料',
+            refreshing: '轻盈透亮',
+            creamy: '醇厚绵密'
+        };
         const teaMap = {
             osmanthus: '桂花乌龙',
             jasmine: '茉莉绿茶',
@@ -707,6 +819,7 @@
         const moodSelect = document.getElementById('mood');
         const teaSelect = document.getElementById('tea');
 
+        // ===== 核心生成函数 =====
         function generateFromSelection(moodValue, teaValue, showToastOnError = true) {
             const result = document.getElementById('result');
 
@@ -714,58 +827,200 @@
                 if (showToastOnError) {
                     showToast('请先选择"口感性格"和"茶底偏好"哦！', '提示', '🧋');
                 }
-                return;
+                return null;
             }
 
             const hit = flavorDB[moodValue]?.[teaValue];
+            let data = null;
+
             if (hit) {
-                document.getElementById('resultTitle').textContent = hit.title;
-                document.getElementById('resultFlavors').innerHTML = hit.flavors.map(f =>
-                    `<span class="flavor-tag">#${f}</span>`
-                ).join('');
-                document.getElementById('resultDesc').textContent = hit.desc;
-                document.getElementById('resultSlogan').textContent = hit.slogan;
-                document.getElementById('resultScore').textContent =
-                    `口感匹配度 ${hit.score} · ${moodMap[moodValue]} × ${teaMap[teaValue]}`;
-                result.classList.add('show');
+                data = { ...hit };
+                data.mood = moodValue;
+                data.tea = teaValue;
             } else {
                 const fallback = flavorDB[moodValue]?.[Object.keys(flavorDB[moodValue])[0]];
                 if (fallback) {
-                    document.getElementById('resultTitle').textContent = `${fallback.title}（推荐适配）`;
-                    document.getElementById('resultFlavors').innerHTML = fallback.flavors.map(f =>
-                        `<span class="flavor-tag">#${f}</span>`
-                    ).join('');
-                    document.getElementById('resultDesc').textContent = fallback.desc +
-                        '（注：该组合为智能推荐，可尝试不同搭配）';
-                    document.getElementById('resultSlogan').textContent = fallback.slogan;
-                    document.getElementById('resultScore').textContent =
-                        `口感匹配度 ${fallback.score} · ${moodMap[moodValue]} × 相近茶底`;
-                    result.classList.add('show');
+                    data = { ...fallback };
+                    data.mood = moodValue;
+                    data.tea = teaValue;
+                    data.isFallback = true;
                 } else {
                     if (showToastOnError) {
                         showToast('暂无该组合的小料概念，试试其他选择吧！', '提示', '🧋');
                     }
+                    return null;
                 }
             }
 
-            const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
+            // 显示结果
+            document.getElementById('resultTitle').textContent = data.title;
+            document.getElementById('resultFlavors').innerHTML = data.flavors.map(f =>
+                `<span class="flavor-tag">#${f}</span>`
+            ).join('');
+            document.getElementById('resultDesc').textContent = data.desc + (data.isFallback ? '（推荐适配）' : '');
+            document.getElementById('resultSlogan').textContent = data.slogan;
+            document.getElementById('resultScore').textContent =
+                `口感匹配度 ${data.score} · ${moodMap[moodValue]} × ${teaMap[teaValue]}`;
+            document.getElementById('resultExtra').innerHTML = '';
+            document.getElementById('result').classList.add('show');
+
+            return data;
         }
 
+        // ===== 生成小料 =====
         function generate() {
             generateFromSelection(moodSelect.value, teaSelect.value, true);
         }
 
-        function randomGenerate() {
+        // ===== 漂流瓶模式（原随机探索的替代） =====
+        function bottleMode() {
             const moodKeys = Object.keys(flavorDB);
             const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
             const randomMood = moodKeys[Math.floor(Math.random() * moodKeys.length)];
             const randomTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
+            const message = bottleMessages[Math.floor(Math.random() * bottleMessages.length)];
+
             moodSelect.value = randomMood;
             teaSelect.value = randomTea;
-            generateFromSelection(randomMood, randomTea, false);
+            const data = generateFromSelection(randomMood, randomTea, false);
+
+            if (data) {
+                document.getElementById('resultExtra').innerHTML = `
+                    <div class="bottle">
+                        <span class="bottle-icon">🍾</span>
+                        ${message}
+                    </div>
+                `;
+            }
         }
 
-        const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
+        // ===== 今日运势 =====
+        function generateWithFortune() {
+            const data = generateFromSelection(moodSelect.value, teaSelect.value, true);
+            if (data) {
+                const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+                document.getElementById('resultExtra').innerHTML =
+                    `<div class="fortune">🔮今日运势：${fortune}</div>`;
+            }
+        }
+
+        // ===== 隐藏菜单 =====
+        function generateHiddenMenu() {
+            const data = generateFromSelection(moodSelect.value, teaSelect.value, true);
+            if (data) {
+                const code = hiddenCodes[Math.floor(Math.random() * hiddenCodes.length)];
+                document.getElementById('resultExtra').innerHTML = `
+                    <div class="hidden-code">${code}</div>
+                    <div style="font-size:13px;color:#888;text-align:center;margin-top:6px;">
+                        💡到店对店员说出暗号，即可解锁隐藏喝法！
+                    </div>
+                `;
+            }
+        }
+
+        // ===== 盲盒模式 =====
+        let blindboxTimer = null;
+
+        function blindboxMode() {
+            const moodKeys = Object.keys(flavorDB);
+            const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
+            const randomMood = moodKeys[Math.floor(Math.random() * moodKeys.length)];
+            const randomTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
+
+            document.getElementById('result').classList.remove('show');
+
+            document.getElementById('resultExtra').innerHTML = '';
+            document.getElementById('resultTitle').textContent = '盲盒开启中...';
+            document.getElementById('resultFlavors').innerHTML = '';
+            document.getElementById('resultDesc').textContent = '3... 2... 1... 🎉';
+            document.getElementById('resultSlogan').textContent = '';
+            document.getElementById('resultScore').textContent = '';
+            document.getElementById('result').classList.add('show');
+
+            if (blindboxTimer) clearTimeout(blindboxTimer);
+
+            blindboxTimer = setTimeout(() => {
+                moodSelect.value = randomMood;
+                teaSelect.value = randomTea;
+                const data = generateFromSelection(randomMood, randomTea, false);
+                if (data) {
+                    document.getElementById('resultExtra').innerHTML =
+                        `<div style="font-size:14px;color:#666;text-align:center;margin-top:10px;">🎉 盲盒揭晓！你抽到了：</div>`;
+                }
+                blindboxTimer = null;
+            }, 1200);
+        }
+
+        // ===== PK擂台 =====
+        function pkMode() {
+            const moodValue = moodSelect.value;
+            const teaValue = teaSelect.value;
+
+            if (!moodValue || !teaValue) {
+                showToast('请先选择"口感性格"和"茶底偏好"哦！', '提示', '🧋');
+                return;
+            }
+
+            const data = generateFromSelection(moodValue, teaValue, false);
+            if (!data) return;
+
+            const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
+            let secondTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
+            let attempts = 0;
+            while (secondTea === teaValue && attempts < 10) {
+                secondTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
+                attempts++;
+            }
+            const secondData = flavorDB[moodValue]?.[secondTea];
+            if (!secondData) {
+                showToast('PK对手不够了，再试一次吧！', '提示', '🧋');
+                return;
+            }
+
+            document.getElementById('resultTitle').textContent = '小料PK擂台';
+            document.getElementById('resultFlavors').innerHTML = '';
+            document.getElementById('resultDesc').textContent = '点击下方你更喜欢的一款！';
+            document.getElementById('resultSlogan').textContent = '';
+            document.getElementById('resultScore').textContent = '';
+            document.getElementById('resultExtra').innerHTML = `
+                <div class="pk-vs">
+                    <div class="pk-item" onclick="pkChoose('A')" id="pkA">
+                        <div class="pk-name">${data.title}</div>
+                        <div class="pk-desc">${data.desc.substring(0, 20)}...</div>
+                        <div style="font-size:13px;color:#888;margin-top:4px;">${data.score} · ${teaMap[teaValue]}</div>
+                    </div>
+                    <div class="pk-vs-text">VS</div>
+                    <div class="pk-item" onclick="pkChoose('B')" id="pkB">
+                        <div class="pk-name">${secondData.title}</div>
+                        <div class="pk-desc">${secondData.desc.substring(0, 20)}...</div>
+                        <div style="font-size:13px;color:#888;margin-top:4px;">${secondData.score} · ${teaMap[secondTea]}</div>
+                    </div>
+                </div>
+                <div id="pkResult" style="text-align:center;font-size:16px;font-weight:600;color:#003399;margin-top:12px;"></div>
+            `;
+
+            document.getElementById('result').classList.add('show');
+            window._pkData = { A: data, B: secondData };
+        }
+
+        function pkChoose(choice) {
+            const data = window._pkData;
+            if (!data) return;
+
+            const selected = choice === 'A' ? data.A : data.B;
+            const name = choice === 'A' ? data.A.title : data.B.title;
+
+            document.getElementById('pkA').classList.remove('selected');
+            document.getElementById('pkB').classList.remove('selected');
+            if (choice === 'A') {
+                document.getElementById('pkA').classList.add('selected');
+            } else {
+                document.getElementById('pkB').classList.add('selected');
+            }
+
+            document.getElementById('pkResult').textContent =
+                `你选择了「${name}」！口感匹配度 ${selected.score}`;
+        }
     </script>
 </body>
 </html>
