@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>星河引擎 · AI小料推荐模拟器</title>
+    <title>星河引擎 · 茶的百次方 · AI小料共创模拟器</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -129,21 +129,21 @@
 </head>
 <body>
     <div class="card">
-        <span class="badge"> 概念验证 · 星河引擎 v0.1</span>
-        <span class="emoji-big"></span>
-        <h1>AI 小料共创模拟器</h1>
+        <span class="badge">🍵 茶的百次方 · 星河引擎 v0.1</span>
+        <span class="emoji-big">🧋</span>
+        <h1>星河引擎 · AI 小料共创模拟器</h1>
         <p class="sub">基于口感情绪聚类 · 反向生成小料概念</p>
 
-        <label for="mood"> 选择你的"口感性格"</label>
+        <label for="mood">选择你的"口感性格"</label>
         <select id="mood">
             <option value="">—— 请选择 ——</option>
-            <option value="crunch"> 咀嚼解压党 · 脆爽爆破感</option>
-            <option value="chewy"> 糯叽叽星人 · 绵密有嚼劲</option>
-            <option value="smooth"> 清爽顺滑派 · 丝滑不腻</option>
-            <option value="filling"> 饱腹养生组 · 扎实有料</option>
+            <option value="crunch">咀嚼解压党 · 脆爽爆破感</option>
+            <option value="chewy">糯叽叽星人 · 绵密有嚼劲</option>
+            <option value="smooth">清爽顺滑派 · 丝滑不腻</option>
+            <option value="filling">饱腹养生组 · 扎实有料</option>
         </select>
 
-        <label for="tea"> 搭配茶底偏好</label>
+        <label for="tea">搭配茶底偏好</label>
         <select id="tea">
             <option value="">—— 请选择 ——</option>
             <option value="osmanthus">桂花乌龙</option>
@@ -155,16 +155,16 @@
         <button class="btn" onclick="generate()">AI 生成小料概念</button>
 
         <div class="result" id="result">
-            <h3 id="resultTitle"> 椰云马蹄爆珠</h3>
+            <h3 id="resultTitle">椰云马蹄爆珠</h3>
             <div class="desc" id="resultDesc">
                 分子料理级爆珠 · 马蹄颗粒包裹椰浆流心<br />
                 咬破瞬间释放清甜椰香，与桂花乌龙茶底形成"茶香+爆破"双重愉悦
             </div>
-            <span class="tag" id="resultTag">#口感匹配度 92%</span>
+            <span class="tag" id="resultTag">口感匹配度 92%</span>
         </div>
 
         <div class="footer">
-             模拟数据基于茶百道1.8亿会员评价聚类 · 仅供概念演示
+            模拟数据基于茶百道1.8亿会员评价聚类 · 茶的百次方 · 仅供概念演示
         </div>
     </div>
 
@@ -173,22 +173,22 @@
             crunch: {
                 title: '椰云马蹄爆珠',
                 desc: '分子料理级爆珠 · 马蹄颗粒包裹椰浆流心，咬破瞬间释放清甜椰香，与桂花乌龙茶底形成"茶香+爆破"双重愉悦',
-                tag: '#口感匹配度 92% · 脆爽解压'
+                tag: '口感匹配度 92% · 脆爽解压'
             },
             chewy: {
                 title: '黑糖麻薯芋泥波波',
                 desc: '手捣芋泥混合黑糖麻薯丁，吸管每口都能吃到软糯Q弹的麻薯颗粒，与经典红茶底搭配，饱腹感与幸福感兼具',
-                tag: '#口感匹配度 89% · 糯叽叽治愈'
+                tag: '口感匹配度 89% · 糯叽叽治愈'
             },
             smooth: {
                 title: '青柠薄荷冻冻',
                 desc: '透明茶冻添加天然青柠薄荷萃取液，入口即化的清爽感，搭配茉莉绿茶，宛如一阵清凉山风掠过舌尖',
-                tag: '#口感匹配度 94% · 清爽不腻'
+                tag: '口感匹配度 94% · 清爽不腻'
             },
             filling: {
                 title: '桂圆红枣血糯米',
                 desc: '低温慢煮血糯米保持颗粒感，加入桂圆干与红枣碎，铁观音茶底回甘悠长，一杯满足下午茶代餐需求',
-                tag: '#口感匹配度 87% · 养生饱腹'
+                tag: '口感匹配度 87% · 养生饱腹'
             }
         };
 
