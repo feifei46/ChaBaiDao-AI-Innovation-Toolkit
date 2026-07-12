@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>星河引擎 · 茶的百次方 · AI小料共创模拟器</title>
+    <title>茶的百次方 · AI小料共创模拟器</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -259,20 +259,20 @@
 
     <!-- ===== 主页面 ===== -->
     <div class="card">
-        <span class="badge">茶的百次方 · 星河引擎 v0.2</span>
+        <span class="badge">茶的百次方</span>
         <span class="emoji-big">🧋</span>
-        <h1>星河引擎 · AI 小料共创模拟器</h1>
+        <h1>AI 小料共创模拟器</h1>
         <p class="sub">基于口感情绪聚类 + 茶底风味匹配 · 24款小料概念库</p>
 
         <label for="mood">选择你的"口感性格"</label>
         <select id="mood">
             <option value="">—— 请选择 ——</option>
-            <option value="crunch">咀嚼解压党 · 脆爽爆破感</option>
-            <option value="chewy">糯叽叽星人 · 绵密有嚼劲</option>
-            <option value="smooth">清爽顺滑派 · 丝滑不腻</option>
-            <option value="filling">饱腹养生组 · 扎实有料</option>
-            <option value="refreshing">清爽草本系 · 轻盈透亮</option>
-            <option value="creamy">浓郁乳香系 · 醇厚绵密</option>
+            <option value="crunch">脆爽爆破感</option>
+            <option value="chewy">绵密有嚼劲</option>
+            <option value="smooth">丝滑不腻</option>
+            <option value="filling">扎实有料</option>
+            <option value="refreshing">轻盈透亮</option>
+            <option value="creamy">醇厚绵密</option>
         </select>
 
         <label for="tea">搭配茶底偏好</label>
@@ -622,7 +622,6 @@
                 }
                 return;
             }
-
             const hit = flavorDB[moodValue]?.[teaValue];
             if (hit) {
                 document.getElementById('resultTitle').textContent = hit.title;
@@ -650,15 +649,12 @@
                     }
                 }
             }
-
             const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
             document.getElementById('resultCount').textContent = `已生成 ${count} 款小料概念 · 覆盖 6 种口感 × 6 种茶底`;
         }
-
         function generate() {
             generateFromSelection(moodSelect.value, teaSelect.value, true);
         }
-
         function randomGenerate() {
             const moodKeys = Object.keys(flavorDB);
             const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
@@ -668,9 +664,7 @@
             teaSelect.value = randomTea;
             generateFromSelection(randomMood, randomTea, false);
         }
-
         const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
-        document.getElementById('resultCount').textContent = `已生成 ${count} 款小料概念 · 覆盖 6 种口感 × 6 种茶底`;
     </script>
 </body>
 </html>
