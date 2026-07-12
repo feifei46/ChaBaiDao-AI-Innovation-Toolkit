@@ -329,7 +329,7 @@
         </select>
 
         <button class="btn" onclick="generate()">生成小料</button>
-        <button class="btn btn-light" onclick="blindboxMode()">🎁 盲盒模式</button>
+        <button class="btn btn-light" onclick="blindboxMode()">盲盒模式</button>
 
         <div class="result" id="result">
             <h3 id="resultTitle">椰云马蹄爆珠</h3>
@@ -644,6 +644,9 @@
             white: '白毫银针'
         };
 
+        const moodSelect = document.getElementById('mood');
+        const teaSelect = document.getElementById('tea');
+
         // ===== 核心生成函数 =====
         function generateFromSelection(moodValue, teaValue, showToastOnError = true, isBlindbox = false) {
             const result = document.getElementById('result');
@@ -656,30 +659,29 @@
                 return null;
             }
 
-            // 如果是盲盒模式，随机取值
+            // 如果是盲盒模式，随机取值（但不修改下拉菜单）
+            let actualMood = moodValue;
+            let actualTea = teaValue;
             if (isBlindbox) {
                 const moodKeys = Object.keys(flavorDB);
                 const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
-                moodValue = moodKeys[Math.floor(Math.random() * moodKeys.length)];
-                teaValue = teaKeys[Math.floor(Math.random() * teaKeys.length)];
-                // 同步更新下拉菜单（让用户看到抽到了什么）
-                document.getElementById('mood').value = moodValue;
-                document.getElementById('tea').value = teaValue;
+                actualMood = moodKeys[Math.floor(Math.random() * moodKeys.length)];
+                actualTea = teaKeys[Math.floor(Math.random() * teaKeys.length)];
             }
 
-            const hit = flavorDB[moodValue]?.[teaValue];
+            const hit = flavorDB[actualMood]?.[actualTea];
             let data = null;
 
             if (hit) {
                 data = { ...hit };
-                data.mood = moodValue;
-                data.tea = teaValue;
+                data.mood = actualMood;
+                data.tea = actualTea;
             } else {
-                const fallback = flavorDB[moodValue]?.[Object.keys(flavorDB[moodValue])[0]];
+                const fallback = flavorDB[actualMood]?.[Object.keys(flavorDB[actualMood])[0]];
                 if (fallback) {
                     data = { ...fallback };
-                    data.mood = moodValue;
-                    data.tea = teaValue;
+                    data.mood = actualMood;
+                    data.tea = actualTea;
                     data.isFallback = true;
                 } else {
                     if (showToastOnError) {
@@ -689,7 +691,11 @@
                 }
             }
 
-            const extraHTML = isBlindbox ? '<div class="extra">🎉 盲盒揭晓！你抽到了：</div>' : '';
+            // 构建结果HTML
+            let extraHTML = '';
+            if (isBlindbox) {
+                extraHTML = `<div class="extra">盲盒揭晓！你抽到了：${moodMap[actualMood]} × ${teaMap[actualTea]}</div>`;
+            }
 
             document.getElementById('resultTitle').textContent = data.title;
             document.getElementById('resultFlavors').innerHTML = data.flavors.map(f =>
@@ -698,18 +704,16 @@
             document.getElementById('resultDesc').textContent = data.desc + (data.isFallback ? '（推荐适配）' : '');
             document.getElementById('resultSlogan').textContent = data.slogan;
             document.getElementById('resultScore').textContent =
-                `口感匹配度 ${data.score} · ${moodMap[moodValue]} × ${teaMap[teaValue]}`;
+                `口感匹配度 ${data.score} · ${moodMap[actualMood]} × ${teaMap[actualTea]}`;
             document.getElementById('resultExtra').innerHTML = extraHTML;
-            document.getElementById('result').classList.add('show');
+            result.classList.add('show');
 
             return data;
         }
 
         // ===== 生成小料 =====
         function generate() {
-            const moodValue = document.getElementById('mood').value;
-            const teaValue = document.getElementById('tea').value;
-            generateFromSelection(moodValue, teaValue, true, false);
+            generateFromSelection(moodSelect.value, teaSelect.value, true, false);
         }
 
         // ===== 盲盒模式 =====
@@ -723,9 +727,9 @@
 
             // 显示盲盒动画
             document.getElementById('resultExtra').innerHTML = '';
-            document.getElementById('resultTitle').textContent = '🎁 盲盒开启中...';
+            document.getElementById('resultTitle').textContent = '盲盒开启中...';
             document.getElementById('resultFlavors').innerHTML = '';
-            document.getElementById('resultDesc').textContent = '3... 2... 1... 🎉';
+            document.getElementById('resultDesc').textContent = '3... 2... 1... ';
             document.getElementById('resultSlogan').textContent = '';
             document.getElementById('resultScore').textContent = '';
             result.classList.add('show');
@@ -733,7 +737,7 @@
             if (blindboxTimer) clearTimeout(blindboxTimer);
 
             blindboxTimer = setTimeout(() => {
-                // 直接调用生成函数，传入 isBlindbox = true
+                // 调用生成函数，isBlindbox = true，不修改下拉菜单
                 generateFromSelection(null, null, false, true);
                 blindboxTimer = null;
             }, 1200);
