@@ -8,7 +8,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f5f0eb 0%, #e8ddd0 100%);
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -16,17 +16,18 @@
             padding: 20px;
         }
         .card {
-            background: white;
+            background: #ffffff;
             border-radius: 24px;
             padding: 40px 48px;
-            max-width: 560px;
+            max-width: 600px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 60px rgba(0, 51, 153, 0.15);
+            border: 1px solid rgba(0, 51, 153, 0.08);
         }
         .badge {
             display: inline-block;
-            background: #1a1a2e;
-            color: #e8d5b7;
+            background: #003399;
+            color: #ffffff;
             font-size: 12px;
             font-weight: 600;
             padding: 4px 14px;
@@ -37,11 +38,11 @@
         h1 {
             font-size: 24px;
             font-weight: 700;
-            color: #1a1a2e;
+            color: #003399;
             margin-bottom: 6px;
         }
         .sub {
-            color: #8a7a6a;
+            color: #666666;
             font-size: 14px;
             margin-bottom: 24px;
         }
@@ -53,7 +54,7 @@
         label {
             font-weight: 600;
             font-size: 14px;
-            color: #2d2a24;
+            color: #003399;
             display: block;
             margin-bottom: 6px;
         }
@@ -61,78 +62,131 @@
             width: 100%;
             padding: 12px 16px;
             border-radius: 12px;
-            border: 1.5px solid #ddd6ce;
+            border: 1.5px solid #d0dbe8;
             font-size: 15px;
-            background: #fcf9f6;
+            background: #f8faff;
             transition: 0.2s;
             margin-bottom: 16px;
             outline: none;
+            color: #1a1a2e;
         }
         select:focus, input:focus {
-            border-color: #b8a088;
-            background: white;
+            border-color: #003399;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.12);
         }
         .btn {
             width: 100%;
             padding: 14px;
-            background: #1a1a2e;
+            background: #003399;
             color: white;
             font-size: 16px;
             font-weight: 600;
             border: none;
             border-radius: 14px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
         }
         .btn:hover {
-            background: #2d2a44;
-            transform: translateY(-1px);
+            background: #002277;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 51, 153, 0.25);
+        }
+        .btn:active {
+            transform: scale(0.98);
         }
         .result {
             margin-top: 24px;
             padding: 20px 24px;
-            background: #f8f4ef;
+            background: #f8faff;
             border-radius: 16px;
             display: none;
-            border-left: 4px solid #b8a088;
+            border-left: 4px solid #003399;
+            animation: fadeIn 0.4s ease;
         }
         .result.show { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .result h3 {
-            font-size: 18px;
-            color: #1a1a2e;
+            font-size: 20px;
+            color: #003399;
             margin-bottom: 4px;
         }
+        .result .flavor-tag {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #003399;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 6px;
+        }
         .result .desc {
-            color: #5a4f44;
+            color: #333333;
             font-size: 14px;
             line-height: 1.6;
+            margin: 8px 0;
         }
-        .tag {
+        .result .slogan {
+            color: #666666;
+            font-size: 13px;
+            font-style: italic;
+            margin: 6px 0;
+        }
+        .result .score {
             display: inline-block;
-            background: #e8ddd0;
+            background: #003399;
+            color: #ffffff;
             padding: 2px 14px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
-            color: #3d352c;
             margin-top: 8px;
         }
         .footer {
             margin-top: 20px;
             font-size: 12px;
-            color: #b0a69a;
+            color: #999999;
             text-align: center;
-            border-top: 1px solid #eee8e0;
+            border-top: 1px solid #e8f0fe;
             padding-top: 16px;
+        }
+        .result-count {
+            text-align: center;
+            color: #999999;
+            font-size: 13px;
+            margin-top: 16px;
+        }
+        /* 茶百道蓝色点缀细节 */
+        .card .badge {
+            background: #003399;
+        }
+        .btn {
+            background: #003399;
+        }
+        .btn:hover {
+            background: #002266;
+        }
+        select option {
+            color: #1a1a2e;
+        }
+        /* 白色为主，蓝色为点缀 */
+        .card {
+            background: #ffffff;
+        }
+        body {
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <span class="badge">🍵 茶的百次方 · 星河引擎 v0.1</span>
+        <span class="badge">茶的百次方 · 星河引擎 v0.2</span>
         <span class="emoji-big">🧋</span>
         <h1>星河引擎 · AI 小料共创模拟器</h1>
-        <p class="sub">基于口感情绪聚类 · 反向生成小料概念</p>
+        <p class="sub">基于口感情绪聚类 + 茶底风味匹配 · 24款小料概念库</p>
 
         <label for="mood">选择你的"口感性格"</label>
         <select id="mood">
@@ -141,27 +195,32 @@
             <option value="chewy">糯叽叽星人 · 绵密有嚼劲</option>
             <option value="smooth">清爽顺滑派 · 丝滑不腻</option>
             <option value="filling">饱腹养生组 · 扎实有料</option>
+            <option value="refreshing">清爽草本系 · 轻盈透亮</option>
+            <option value="creamy">浓郁乳香系 · 醇厚绵密</option>
         </select>
 
         <label for="tea">搭配茶底偏好</label>
         <select id="tea">
             <option value="">—— 请选择 ——</option>
-            <option value="osmanthus">桂花乌龙</option>
-            <option value="jasmine">茉莉绿茶</option>
-            <option value="black">经典红茶</option>
-            <option value="tieguanyin">铁观音</option>
+            <option value="osmanthus">桂花乌龙 · 花香甘润</option>
+            <option value="jasmine">茉莉绿茶 · 清雅鲜爽</option>
+            <option value="black">经典红茶 · 醇厚浓郁</option>
+            <option value="tieguanyin">铁观音 · 兰香悠长</option>
+            <option value="matcha">抹茶 · 微苦回甘</option>
+            <option value="white">白毫银针 · 清甜淡雅</option>
         </select>
 
-        <button class="btn" onclick="generate()">AI 生成小料概念</button>
+        <button class="btn" onclick="generate()">AI生成小料概念</button>
 
         <div class="result" id="result">
             <h3 id="resultTitle">椰云马蹄爆珠</h3>
-            <div class="desc" id="resultDesc">
-                分子料理级爆珠 · 马蹄颗粒包裹椰浆流心<br />
-                咬破瞬间释放清甜椰香，与桂花乌龙茶底形成"茶香+爆破"双重愉悦
-            </div>
-            <span class="tag" id="resultTag">口感匹配度 92%</span>
+            <div id="resultFlavors"></div>
+            <div class="desc" id="resultDesc">分子料理级爆珠 · 马蹄颗粒包裹椰浆流心</div>
+            <div class="slogan" id="resultSlogan">「咬破瞬间，清甜炸裂」</div>
+            <span class="score" id="resultScore">口感匹配度 92%</span>
         </div>
+
+        <div class="result-count" id="resultCount">已生成 0 款小料概念 · 持续扩充中</div>
 
         <div class="footer">
             模拟数据基于茶百道1.8亿会员评价聚类 · 茶的百次方 · 仅供概念演示
@@ -169,27 +228,291 @@
     </div>
 
     <script>
-        const data = {
+        // 24款小料概念数据库
+        const flavorDB = {
             crunch: {
-                title: '椰云马蹄爆珠',
-                desc: '分子料理级爆珠 · 马蹄颗粒包裹椰浆流心，咬破瞬间释放清甜椰香，与桂花乌龙茶底形成"茶香+爆破"双重愉悦',
-                tag: '口感匹配度 92% · 脆爽解压'
+                osmanthus: {
+                    title: '椰云马蹄爆珠',
+                    flavors: ['马蹄颗粒', '椰浆流心', '桂花香'],
+                    desc: '分子料理级爆珠工艺，马蹄颗粒包裹椰浆流心，咬破瞬间清甜炸裂，桂花乌龙茶底香气随之释放',
+                    slogan: '「咬破瞬间，清甜炸裂」',
+                    score: '92%'
+                },
+                jasmine: {
+                    title: '青柠薄荷爆珠',
+                    flavors: ['青柠汁', '薄荷萃取', '茉莉花香'],
+                    desc: '透明爆珠包裹青柠薄荷液，入口爆破带来清凉冲击，与茉莉绿茶形成"冰爽+鲜灵"双重体验',
+                    slogan: '「一口爆破，冰爽入魂」',
+                    score: '94%'
+                },
+                black: {
+                    title: '脆波波黑糖珍珠',
+                    flavors: ['黑糖珍珠', '焦糖脆壳', '红茶香'],
+                    desc: '珍珠外层裹焦糖脆壳，内里软糯Q弹，嚼劲十足，与经典红茶底搭配浓郁醇厚',
+                    slogan: '「外脆内糯，越嚼越香」',
+                    score: '90%'
+                },
+                tieguanyin: {
+                    title: '铁观音茶冻脆珠',
+                    flavors: ['铁观音茶冻', '脆珠', '兰花香'],
+                    desc: '茶冻切成小方块，外层包裹脆珠，入口先是脆爽，随即茶冻在口中化开，铁观音兰香悠长',
+                    slogan: '「先脆后化，兰香满口」',
+                    score: '91%'
+                },
+                matcha: {
+                    title: '抹茶脆米球',
+                    flavors: ['脆米球', '抹茶粉', '玄米香'],
+                    desc: '脆米球裹抹茶粉，咬碎时发出咔嚓声，抹茶微苦与脆米焦香交织，抹茶茶底绝配',
+                    slogan: '「咔嚓一声，抹茶觉醒」',
+                    score: '93%'
+                },
+                white: {
+                    title: '白桃脆珠',
+                    flavors: ['白桃颗粒', '脆珠', '蜜桃香'],
+                    desc: '白桃果肉切丁，外层包裹糯米脆皮，咬破后桃香四溢，与白毫银针的清甜相得益彰',
+                    slogan: '「桃香脆珠，甜过初恋」',
+                    score: '95%'
+                }
             },
             chewy: {
-                title: '黑糖麻薯芋泥波波',
-                desc: '手捣芋泥混合黑糖麻薯丁，吸管每口都能吃到软糯Q弹的麻薯颗粒，与经典红茶底搭配，饱腹感与幸福感兼具',
-                tag: '口感匹配度 89% · 糯叽叽治愈'
+                osmanthus: {
+                    title: '桂花酒酿麻薯',
+                    flavors: ['麻薯丁', '桂花酒酿', '米香'],
+                    desc: '手打麻薯切丁，加入桂花酒酿颗粒，软糯中带着淡淡的酒香，与桂花乌龙形成"花香+酒香"的层次感',
+                    slogan: '「糯糯的，微醺的」',
+                    score: '88%'
+                },
+                jasmine: {
+                    title: '茉莉芋泥波波',
+                    flavors: ['芋泥', '芋圆波波', '茉莉花香'],
+                    desc: '手捣芋泥混合小芋圆，每一口都能吃到绵密芋泥和Q弹波波，茉莉绿茶底清爽不腻',
+                    slogan: '「绵密Q弹，芋见茉莉」',
+                    score: '90%'
+                },
+                black: {
+                    title: '黑糖麻薯芋泥',
+                    flavors: ['黑糖麻薯', '芋泥', '焦糖香'],
+                    desc: '黑糖麻薯丁配手捣芋泥，麻薯拉丝软糯，芋泥绵密，经典红茶底提升醇厚感',
+                    slogan: '「拉丝软糯，黑糖灵魂」',
+                    score: '89%'
+                },
+                tieguanyin: {
+                    title: '铁观音珍珠丸',
+                    flavors: ['珍珠丸', '铁观音茶冻丁', '兰花韵'],
+                    desc: '大颗珍珠丸内包铁观音茶冻，咬开时茶冻流出，与铁观音茶底形成"茶中藏茶"的趣味',
+                    slogan: '「茶中有茶，双重惊喜」',
+                    score: '87%'
+                },
+                matcha: {
+                    title: '抹茶白玉丸子',
+                    flavors: ['白玉丸子', '抹茶酱', '糯米香'],
+                    desc: '糯米白玉丸子裹抹茶酱，入口软糯Q弹，抹茶微苦与抹茶茶底深度呼应',
+                    slogan: '「白玉裹绿，糯感升级」',
+                    score: '91%'
+                },
+                white: {
+                    title: '荔枝白玉波波',
+                    flavors: ['白玉波波', '荔枝果肉', '蜜甜香'],
+                    desc: '白玉波波内嵌荔枝果肉丁，口感软糯中带着果肉纤维，与白毫银针的清甜完美契合',
+                    slogan: '「糯中带甜，果香满溢」',
+                    score: '86%'
+                }
             },
             smooth: {
-                title: '青柠薄荷冻冻',
-                desc: '透明茶冻添加天然青柠薄荷萃取液，入口即化的清爽感，搭配茉莉绿茶，宛如一阵清凉山风掠过舌尖',
-                tag: '口感匹配度 94% · 清爽不腻'
+                osmanthus: {
+                    title: '桂花奶冻',
+                    flavors: ['奶冻', '桂花蜜', '丝滑'],
+                    desc: '意式奶冻质地，融入桂花蜜，入口即化，顺滑如丝，桂花乌龙茶底的花香被奶香包裹',
+                    slogan: '「丝滑入喉，桂香萦绕」',
+                    score: '93%'
+                },
+                jasmine: {
+                    title: '青提芦荟冻',
+                    flavors: ['芦荟粒', '青提汁', '清新'],
+                    desc: '大粒芦荟肉配青提汁制成的透明冻，清爽滑嫩，与茉莉绿茶形成"鲜灵+清透"的夏日组合',
+                    slogan: '「清清爽爽，滑过舌尖」',
+                    score: '95%'
+                },
+                black: {
+                    title: '奶茶布丁',
+                    flavors: ['布丁', '焦糖酱', '奶香'],
+                    desc: '绵密布丁配焦糖酱，口感细腻顺滑，经典红茶底的醇厚被布丁的奶香放大',
+                    slogan: '「像在吃固体奶茶」',
+                    score: '88%'
+                },
+                tieguanyin: {
+                    title: '铁观音椰奶冻',
+                    flavors: ['椰奶冻', '铁观音茶液', '热带风'],
+                    desc: '椰奶冻浸铁观音茶液，一口咬下茶香与椰香交融，铁观音茶底的空灵感被放大',
+                    slogan: '「茶与椰的温柔碰撞」',
+                    score: '90%'
+                },
+                matcha: {
+                    title: '抹茶奶冻卷',
+                    flavors: ['抹茶奶冻', '奶油', '微苦回甘'],
+                    desc: '抹茶奶冻卷裹奶油馅，入口即化，微苦与奶香交织，与抹茶茶底构成"双重抹茶"体验',
+                    slogan: '「抹茶控的双重暴击」',
+                    score: '94%'
+                },
+                white: {
+                    title: '蜜桃奶冻',
+                    flavors: ['奶冻', '蜜桃果茸', '蜜甜'],
+                    desc: '奶冻融蜜桃果茸，桃香与奶香层层递进，白毫银针的甘甜被温柔包裹',
+                    slogan: '「蜜桃奶香，温柔治愈」',
+                    score: '91%'
+                }
             },
             filling: {
-                title: '桂圆红枣血糯米',
-                desc: '低温慢煮血糯米保持颗粒感，加入桂圆干与红枣碎，铁观音茶底回甘悠长，一杯满足下午茶代餐需求',
-                tag: '口感匹配度 87% · 养生饱腹'
+                osmanthus: {
+                    title: '桂圆红枣血糯米',
+                    flavors: ['血糯米', '桂圆干', '红枣碎'],
+                    desc: '血糯米慢煮至软糯，加入桂圆干与红枣碎，桂花乌龙茶底解甜腻，一杯满足代餐需求',
+                    slogan: '「养生饱腹，一杯到位」',
+                    score: '87%'
+                },
+                jasmine: {
+                    title: '燕麦米乳波波',
+                    flavors: ['燕麦粒', '米乳波波', '谷物香'],
+                    desc: '燕麦粒配米乳制成的大波波，嚼劲十足，茉莉绿茶底清爽解腻，早餐代餐首选',
+                    slogan: '「嚼得到的谷物能量」',
+                    score: '85%'
+                },
+                black: {
+                    title: '黑米紫薯泥',
+                    flavors: ['黑米粒', '紫薯泥', '坚果碎'],
+                    desc: '紫薯泥配黑米粒，撒坚果碎，口感层次丰富，经典红茶底提升整体醇厚感',
+                    slogan: '「紫薯与黑米的扎实拥抱」',
+                    score: '83%'
+                },
+                tieguanyin: {
+                    title: '铁观音银耳羹',
+                    flavors: ['银耳', '枸杞', '胶质感'],
+                    desc: '慢炖银耳羹加入枸杞，胶质满满，滑润爽口，铁观音茶底解腻提神',
+                    slogan: '「胶质满满，润到心里」',
+                    score: '86%'
+                },
+                matcha: {
+                    title: '抹茶红豆年糕丁',
+                    flavors: ['年糕丁', '红豆', '抹茶香'],
+                    desc: '年糕丁配蜜红豆，软糯与颗粒感并存，抹茶茶底提鲜解腻，日式风味十足',
+                    slogan: '「日式糯感，抹茶灵魂」',
+                    score: '88%'
+                },
+                white: {
+                    title: '雪梨银耳波波',
+                    flavors: ['雪梨丁', '银耳', '清甜'],
+                    desc: '雪梨丁配银耳制成的大波波，清甜润喉，白毫银针茶底呼应"清润"主题',
+                    slogan: '「润喉清甜，一杯补水」',
+                    score: '89%'
+                }
+            },
+            refreshing: {
+                osmanthus: {
+                    title: '薄荷桂花冻',
+                    flavors: ['薄荷叶碎', '桂花冻', '清凉感'],
+                    desc: '桂花冻中加入薄荷叶碎，入口清凉，桂花的温润与薄荷的冷冽形成反差，桂花乌龙茶底增添底韵',
+                    slogan: '「冷热交织，桂香透凉」',
+                    score: '91%'
+                },
+                jasmine: {
+                    title: '青柠芦荟晶球',
+                    flavors: ['青柠汁', '芦荟晶球', '茉莉香'],
+                    desc: '透明晶球内包裹芦荟肉与青柠汁，一口咬下清新感爆棚，茉莉绿茶底完美承接这份鲜爽',
+                    slogan: '「晶球爆汁，一口回春」',
+                    score: '96%'
+                },
+                black: {
+                    title: '薄荷奶盖清',
+                    flavors: ['薄荷碎', '奶盖', '凉感'],
+                    desc: '奶盖顶撒薄荷碎，入口先凉后润，经典红茶底在薄荷的衬托下更显醇和',
+                    slogan: '「清凉奶盖，夏日夜话」',
+                    score: '86%'
+                },
+                tieguanyin: {
+                    title: '铁观音薄荷冰珠',
+                    flavors: ['薄荷冰珠', '铁观音', '冰爽'],
+                    desc: '薄荷汁制成冰珠，入口即化带来冰爽冲击，铁观音茶底的兰香在冰感中释放',
+                    slogan: '「冰珠化开，兰香涌出」',
+                    score: '92%'
+                },
+                matcha: {
+                    title: '抹茶薄荷晶冻',
+                    flavors: ['薄荷冻', '抹茶粉', '清凉'],
+                    desc: '薄荷冻裹抹茶粉，清凉与微苦交织，抹茶茶底的深邃被薄荷点亮',
+                    slogan: '「一抹清凉，一抹微苦」',
+                    score: '90%'
+                },
+                white: {
+                    title: '蜜瓜冰沙珠',
+                    flavors: ['蜜瓜粒', '冰沙珠', '清甜'],
+                    desc: '蜜瓜粒裹冰沙制成珠子，入口即化，白毫银针的清甜与蜜瓜的果甜相得益彰',
+                    slogan: '「蜜瓜冰珠，夏日的风」',
+                    score: '93%'
+                }
+            },
+            creamy: {
+                osmanthus: {
+                    title: '桂花奶油啵啵',
+                    flavors: ['奶油啵啵', '桂花蜜', '奶香'],
+                    desc: '奶油制成大啵啵，裹桂花蜜，入口爆浆，奶香与桂花香在口中炸开，桂花乌龙茶底延展花香',
+                    slogan: '「奶油炸弹，桂香轰炸」',
+                    score: '91%'
+                },
+                jasmine: {
+                    title: '茉莉奶盖冻',
+                    flavors: ['奶盖冻', '茉莉花碎', '丝滑'],
+                    desc: '奶盖冻成方块，撒茉莉花碎，入口即化，茉莉绿茶底的鲜灵被奶盖的醇厚包裹',
+                    slogan: '「奶盖化开，茉莉盛开」',
+                    score: '89%'
+                },
+                black: {
+                    title: '焦糖布蕾珍珠',
+                    flavors: ['焦糖布蕾', '珍珠', '焦糖香'],
+                    desc: '布蕾与珍珠混合，焦糖香贯穿始终，经典红茶底的醇厚与焦糖的甜香相得益彰',
+                    slogan: '「焦糖布蕾，奶茶灵魂伴侣」',
+                    score: '93%'
+                },
+                tieguanyin: {
+                    title: '铁观音奶酥粒',
+                    flavors: ['奶酥粒', '铁观音粉末', '酥脆'],
+                    desc: '奶酥粒裹铁观音粉末，入口酥脆，茶香在咀嚼中释放，铁观音茶底的空灵感被奶酥放大',
+                    slogan: '「酥脆茶香，双重口感」',
+                    score: '88%'
+                },
+                matcha: {
+                    title: '抹茶芝士奶盖珠',
+                    flavors: ['芝士奶盖珠', '抹茶粉', '咸甜交织'],
+                    desc: '芝士奶盖制成珠子，裹抹茶粉，入口咸甜交织，抹茶茶底的微苦被芝士中和',
+                    slogan: '「咸甜抹茶，芝士暴击」',
+                    score: '94%'
+                },
+                white: {
+                    title: '椰奶冻丁',
+                    flavors: ['椰奶冻', '椰蓉', '椰香'],
+                    desc: '椰奶冻成丁，裹椰蓉，入口绵密，椰香四溢，白毫银针的清甜与椰奶的醇厚形成层次',
+                    slogan: '「椰奶冻丁，热带风情」',
+                    score: '90%'
+                }
             }
+        };
+
+        // 匹配描述映射
+        const moodMap = {
+            crunch: '咀嚼解压党',
+            chewy: '糯叽叽星人',
+            smooth: '清爽顺滑派',
+            filling: '饱腹养生组',
+            refreshing: '清爽草本系',
+            creamy: '浓郁乳香系'
+        };
+
+        const teaMap = {
+            osmanthus: '桂花乌龙',
+            jasmine: '茉莉绿茶',
+            black: '经典红茶',
+            tieguanyin: '铁观音',
+            matcha: '抹茶',
+            white: '白毫银针'
         };
 
         function generate() {
@@ -202,13 +525,34 @@
                 return;
             }
 
-            const hit = data[mood];
+            const hit = flavorDB[mood]?.[tea];
             if (hit) {
                 document.getElementById('resultTitle').textContent = hit.title;
+                document.getElementById('resultFlavors').innerHTML = hit.flavors.map(f => 
+                    `<span class="flavor-tag">#${f}</span>`
+                ).join('');
                 document.getElementById('resultDesc').textContent = hit.desc;
-                document.getElementById('resultTag').textContent = hit.tag;
+                document.getElementById('resultSlogan').textContent = hit.slogan;
+                document.getElementById('resultScore').textContent = `口感匹配度 ${hit.score} · ${moodMap[mood]} × ${teaMap[tea]}`;
                 result.classList.add('show');
+            } else {
+                // 如果该组合没有预设，显示相近推荐
+                const fallback = flavorDB[mood]?.[Object.keys(flavorDB[mood])[0]];
+                if (fallback) {
+                    document.getElementById('resultTitle').textContent = `${fallback.title}（推荐适配）`;
+                    document.getElementById('resultFlavors').innerHTML = fallback.flavors.map(f => 
+                        `<span class="flavor-tag">#${f}</span>`
+                    ).join('');
+                    document.getElementById('resultDesc').textContent = fallback.desc + '（注：该组合为智能推荐，可尝试不同搭配）';
+                    document.getElementById('resultSlogan').textContent = fallback.slogan;
+                    document.getElementById('resultScore').textContent = `口感匹配度 ${fallback.score} · ${moodMap[mood]} × 相近茶底`;
+                    result.classList.add('show');
+                } else {
+                    alert('暂无该组合的小料概念，试试其他选择吧！');
+                }
             }
+            const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
+            document.getElementById('resultCount').textContent = `已生成 ${count} 款小料概念 · 覆盖 6 种口感 × 6 种茶底`;
         }
     </script>
 </body>
