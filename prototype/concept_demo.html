@@ -288,7 +288,7 @@
 
         <div class="btn-group">
             <button class="btn" onclick="generate()">AI 生成小料概念</button>
-            <button class="btn btn-random" onclick="randomGenerate()">🎲 随机探索</button>
+            <button class="btn btn-random" onclick="randomGenerate()">随机探索</button>
         </div>
 
         <div class="result" id="result">
@@ -298,8 +298,6 @@
             <div class="slogan" id="resultSlogan">「咬破瞬间，清甜炸裂」</div>
             <span class="score" id="resultScore">口感匹配度 92%</span>
         </div>
-
-        <div class="result-count" id="resultCount">已生成 0 款小料概念 · 持续扩充中</div>
 
         <div class="footer">
             模拟数据基于茶百道1.8亿会员评价聚类 · 茶的百次方 · 仅供概念演示
@@ -650,7 +648,6 @@
                 }
             }
             const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
-            document.getElementById('resultCount').textContent = `已生成 ${count} 款小料概念 · 覆盖 6 种口感 × 6 种茶底`;
         }
         function generate() {
             generateFromSelection(moodSelect.value, teaSelect.value, true);
