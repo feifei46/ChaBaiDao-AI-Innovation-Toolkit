@@ -75,12 +75,8 @@
             background: #ffffff;
             box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.12);
         }
-        .btn-group {
-            display: flex;
-            gap: 12px;
-        }
         .btn {
-            flex: 1;
+            width: 100%;
             padding: 14px;
             background: #003399;
             color: white;
@@ -91,6 +87,7 @@
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
+            margin-bottom: 12px;
         }
         .btn:hover {
             background: #002277;
@@ -104,6 +101,7 @@
             background: #ffffff;
             color: #003399;
             border: 2px solid #003399;
+            margin-bottom: 0;
         }
         .btn-random:hover {
             background: #e8f0fe;
@@ -158,20 +156,6 @@
             font-size: 12px;
             font-weight: 500;
             margin-top: 8px;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #999999;
-            text-align: center;
-            border-top: 1px solid #e8f0fe;
-            padding-top: 16px;
-        }
-        .result-count {
-            text-align: center;
-            color: #999999;
-            font-size: 13px;
-            margin-top: 16px;
         }
 
         /* ===== 自定义提示框 ===== */
@@ -286,10 +270,8 @@
             <option value="white">白毫银针 · 清甜淡雅</option>
         </select>
 
-        <div class="btn-group">
-            <button class="btn" onclick="generate()">AI 生成小料概念</button>
-            <button class="btn btn-random" onclick="randomGenerate()">随机探索</button>
-        </div>
+        <button class="btn" onclick="generate()">AI 生成小料概念</button>
+        <button class="btn btn-random" onclick="randomGenerate()">随机探索</button>
 
         <div class="result" id="result">
             <h3 id="resultTitle">椰云马蹄爆珠</h3>
@@ -297,10 +279,6 @@
             <div class="desc" id="resultDesc">分子料理级爆珠 · 马蹄颗粒包裹椰浆流心</div>
             <div class="slogan" id="resultSlogan">「咬破瞬间，清甜炸裂」</div>
             <span class="score" id="resultScore">口感匹配度 92%</span>
-        </div>
-
-        <div class="footer">
-            模拟数据基于茶百道1.8亿会员评价聚类 · 茶的百次方 · 仅供概念演示
         </div>
     </div>
 
@@ -620,6 +598,7 @@
                 }
                 return;
             }
+
             const hit = flavorDB[moodValue]?.[teaValue];
             if (hit) {
                 document.getElementById('resultTitle').textContent = hit.title;
@@ -647,11 +626,14 @@
                     }
                 }
             }
+
             const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
         }
+
         function generate() {
             generateFromSelection(moodSelect.value, teaSelect.value, true);
         }
+
         function randomGenerate() {
             const moodKeys = Object.keys(flavorDB);
             const teaKeys = ['osmanthus', 'jasmine', 'black', 'tieguanyin', 'matcha', 'white'];
@@ -661,6 +643,7 @@
             teaSelect.value = randomTea;
             generateFromSelection(randomMood, randomTea, false);
         }
+
         const count = Object.values(flavorDB).reduce((acc, moodObj) => acc + Object.keys(moodObj).length, 0);
     </script>
 </body>
