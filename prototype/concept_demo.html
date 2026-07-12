@@ -6,24 +6,122 @@
     <title>茶的百次方 · AI小料共创模拟器</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ===== 动态背景 ===== */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            background: #e8f0fe;
+            /* 备用背景色 */
+            overflow: hidden;
+            position: relative;
         }
+
+        /* 水波纹容器 - 覆盖整个页面 */
+        .wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #e8f0fe 0%, #d4e0f5 50%, #e8f0fe 100%);
+            animation: breathe 6s ease-in-out infinite alternate;
+        }
+
+        /* 水波滑动的线条1 */
+        .wave-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0, 51, 153, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(0, 51, 153, 0.04) 0%, transparent 50%);
+            animation: waveSlide 12s ease-in-out infinite alternate;
+        }
+
+        /* 水波滑动的线条2 - 更柔和的光影 */
+        .wave-bg::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(0, 51, 153, 0.03) 0%, transparent 40%);
+            animation: waveSlide2 15s ease-in-out infinite alternate;
+        }
+
+        /* 动态水波流动动画 - 主要波浪 */
+        @keyframes waveSlide {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(2%, -2%) scale(1.02) rotate(1deg);
+            }
+            50% {
+                transform: translate(-1%, 1%) scale(0.98) rotate(-1deg);
+            }
+            75% {
+                transform: translate(1%, 2%) scale(1.01) rotate(0.5deg);
+            }
+            100% {
+                transform: translate(-2%, -1%) scale(1) rotate(-0.5deg);
+            }
+        }
+
+        /* 动态水波流动动画 - 次要波浪 */
+        @keyframes waveSlide2 {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translate(-3%, 1%) scale(1.03) rotate(-1.5deg);
+            }
+            66% {
+                transform: translate(2%, -2%) scale(0.97) rotate(1deg);
+            }
+            100% {
+                transform: translate(-1%, 2%) scale(1) rotate(-0.5deg);
+            }
+        }
+
+        /* 背景呼吸动画 - 颜色深浅变化 */
+        @keyframes breathe {
+            0% {
+                background: linear-gradient(135deg, #e8f0fe 0%, #dce6f8 50%, #e8f0fe 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #dce6f8 0%, #e8f0fe 50%, #dce6f8 100%);
+            }
+            100% {
+                background: linear-gradient(135deg, #e8f0fe 0%, #d4e0f5 50%, #e8f0fe 100%);
+            }
+        }
+
+        /* ===== 卡片（保持白色不透明，浮在背景上方） ===== */
         .card {
-            background: #ffffff;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 40px 48px;
             max-width: 600px;
             width: 100%;
             box-shadow: 0 20px 60px rgba(0, 51, 153, 0.15);
-            border: 1px solid rgba(0, 51, 153, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
+
         .badge {
             display: inline-block;
             background: #003399;
@@ -53,19 +151,21 @@
             display: block;
             margin-bottom: 6px;
         }
-        select, input {
+        select,
+        input {
             width: 100%;
             padding: 12px 16px;
             border-radius: 12px;
             border: 1.5px solid #d0dbe8;
             font-size: 15px;
-            background: #f8faff;
+            background: rgba(248, 250, 255, 0.8);
             transition: 0.2s;
             margin-bottom: 16px;
             outline: none;
             color: #1a1a2e;
         }
-        select:focus, input:focus {
+        select:focus,
+        input:focus {
             border-color: #003399;
             background: #ffffff;
             box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.12);
@@ -104,16 +204,24 @@
         .result {
             margin-top: 24px;
             padding: 20px 24px;
-            background: #f8faff;
+            background: rgba(248, 250, 255, 0.85);
             border-radius: 16px;
             display: none;
             border-left: 4px solid #003399;
             animation: fadeIn 0.4s ease;
         }
-        .result.show { display: block; }
+        .result.show {
+            display: block;
+        }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .result h3 {
             font-size: 20px;
@@ -170,8 +278,12 @@
             display: flex;
         }
         @keyframes fadeInOverlay {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
         .toast-box {
             background: #ffffff;
@@ -184,8 +296,14 @@
             animation: popIn 0.3s ease;
         }
         @keyframes popIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
         .toast-icon {
             font-size: 36px;
@@ -221,9 +339,22 @@
         .toast-btn:active {
             transform: scale(0.96);
         }
+
+        /* 移动端适配 */
+        @media (max-width: 500px) {
+            .card {
+                padding: 28px 20px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- ===== 动态水波纹背景 ===== -->
+    <div class="wave-bg"></div>
 
     <!-- ===== 自定义提示框 ===== -->
     <div class="toast-overlay" id="toastOverlay">
@@ -255,12 +386,12 @@
         <label for="tea">搭配茶底偏好</label>
         <select id="tea">
             <option value="">—— 请选择 ——</option>
-            <option value="osmanthus">桂花乌龙 · 花香甘润</option>
-            <option value="jasmine">茉莉绿茶 · 清雅鲜爽</option>
-            <option value="black">经典红茶 · 醇厚浓郁</option>
-            <option value="tieguanyin">铁观音 · 兰香悠长</option>
-            <option value="matcha">抹茶 · 微苦回甘</option>
-            <option value="white">白毫银针 · 清甜淡雅</option>
+            <option value="osmanthus">桂花乌龙</option>
+            <option value="jasmine">茉莉绿茶</option>
+            <option value="black">经典红茶</option>
+            <option value="tieguanyin">铁观音</option>
+            <option value="matcha">抹茶</option>
+            <option value="white">白毫银针</option>
         </select>
 
         <button class="btn" onclick="generate()">AI 生成小料概念</button>
@@ -595,23 +726,26 @@
             const hit = flavorDB[moodValue]?.[teaValue];
             if (hit) {
                 document.getElementById('resultTitle').textContent = hit.title;
-                document.getElementById('resultFlavors').innerHTML = hit.flavors.map(f => 
+                document.getElementById('resultFlavors').innerHTML = hit.flavors.map(f =>
                     `<span class="flavor-tag">#${f}</span>`
                 ).join('');
                 document.getElementById('resultDesc').textContent = hit.desc;
                 document.getElementById('resultSlogan').textContent = hit.slogan;
-                document.getElementById('resultScore').textContent = `口感匹配度 ${hit.score} · ${moodMap[moodValue]} × ${teaMap[teaValue]}`;
+                document.getElementById('resultScore').textContent =
+                    `口感匹配度 ${hit.score} · ${moodMap[moodValue]} × ${teaMap[teaValue]}`;
                 result.classList.add('show');
             } else {
                 const fallback = flavorDB[moodValue]?.[Object.keys(flavorDB[moodValue])[0]];
                 if (fallback) {
                     document.getElementById('resultTitle').textContent = `✨ ${fallback.title}（推荐适配）`;
-                    document.getElementById('resultFlavors').innerHTML = fallback.flavors.map(f => 
+                    document.getElementById('resultFlavors').innerHTML = fallback.flavors.map(f =>
                         `<span class="flavor-tag">#${f}</span>`
                     ).join('');
-                    document.getElementById('resultDesc').textContent = fallback.desc + '（注：该组合为智能推荐，可尝试不同搭配）';
+                    document.getElementById('resultDesc').textContent = fallback.desc +
+                        '（注：该组合为智能推荐，可尝试不同搭配）';
                     document.getElementById('resultSlogan').textContent = fallback.slogan;
-                    document.getElementById('resultScore').textContent = `口感匹配度 ${fallback.score} · ${moodMap[moodValue]} × 相近茶底`;
+                    document.getElementById('resultScore').textContent =
+                        `口感匹配度 ${fallback.score} · ${moodMap[moodValue]} × 相近茶底`;
                     result.classList.add('show');
                 } else {
                     if (showToastOnError) {
