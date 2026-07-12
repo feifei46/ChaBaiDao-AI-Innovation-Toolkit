@@ -34,7 +34,7 @@ ChaBaiDao-AI-Innovation-Toolkit/
 
 你可以通过以下方式快速了解本方案的核心思路：
 
-1. 阅读方案概览：直接查看 `docs/` 目录下的 **开题报告PDF**，获取完整的方案逻辑。
+1. 阅读方案概览：直接查看 `docs/` 目录下的 **开题报告_茶的百次方PDF**，获取完整的方案逻辑。
 2. 查看模拟数据：打开 `data_sample/user_sentiment_sample.csv`，了解AI如何对用户评价进行"口感情绪"标签化处理。
 3. 体验交互概念：访问 `prototype/concept_demo.html` 的在线演示链接，体验AI小料推荐交互演示。
 
