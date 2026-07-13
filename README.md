@@ -36,7 +36,7 @@ ChaBaiDao-AI-Innovation-Toolkit/
 
 1. 阅读方案概览：直接查看 `docs/` 目录下的 **开题报告_茶的百次方PDF**，获取完整的方案逻辑。
 2. 查看模拟数据：打开 `data_sample/user_sentiment_sample.csv`，了解AI如何对用户评价进行"口感情绪"标签化处理。
-3. 体验交互概念：访问 `prototype/concept_demo.html` 的在线演示链接，体验AI小料推荐交互演示。
+3. 体验交互概念：访问在线演示链接（https://feifei46.github.io/ChaBaiDao-AI-Innovation-Toolkit/prototype/concept_demo.html），体验AI小料推荐交互演示。可以选择"口感性格"和"茶底偏好"，AI 会推荐匹配的小料概念；也可以点击"盲盒模式"，随机探索惊喜搭配。
 
 
 ## 核心设计理念
